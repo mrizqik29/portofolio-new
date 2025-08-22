@@ -34,7 +34,7 @@ onMounted(() => {
   container.value.appendChild(renderer.domElement);
 
   // --- Nebula ---
-  const particles = 1200; // lebih ringan
+  const particles = 1500; // lebih ringan
   const geometry = new THREE.BufferGeometry();
   const positions = new Float32Array(particles * 3);
   const colors = new Float32Array(particles * 3);
@@ -65,7 +65,7 @@ onMounted(() => {
   geometry.setAttribute("color", new THREE.BufferAttribute(colors.slice(0, ptr*3), 3));
 
   const material = new THREE.PointsMaterial({
-    size: 0.18, // lebih kecil
+    size: 0.11, 
     vertexColors: true,
     transparent: true,
     opacity: 0.6,
@@ -80,8 +80,8 @@ onMounted(() => {
   scene.add(new THREE.AmbientLight(0xffffff, 0.15));
 
   function animate() {
-    nebula.rotation.y += 0.0008; // rotasi lebih halus & ringan
-    nebula.rotation.x += 0.00025;
+    nebula.rotation.y += 0.0001; // rotasi lebih halus & ringan
+    nebula.rotation.x += 0.0001;
     renderer.render(scene, camera);
     requestAnimationFrame(animate);
   }

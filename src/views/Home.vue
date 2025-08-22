@@ -4,7 +4,7 @@
       <div class="hero-content">
         <!-- Gambar di kiri -->
         <div class="hero-image" ref="heroImage">
-          <img :src="Profile" alt="Profile" loading="lazy" />
+          <img :src="Profile" alt="Profile" />
         </div>
 
         <!-- Teks di kanan -->
@@ -25,34 +25,21 @@
 <script setup>
 import { ref, onMounted, nextTick } from 'vue'
 import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Profile from '../assets/profile.jpg'
 import '../css/home.css'
-
-gsap.registerPlugin(ScrollTrigger)
 
 const heroImage = ref(null)
 const title = ref(null)
 const role = ref(null)
 const description = ref(null)
 
-onMounted(() => {
-  nextTick(() => {
-    const elements = [heroImage.value, title.value, role.value, description.value]
+onMounted(async () => {
+  await nextTick()
 
-    gsap.from(elements, {
-      x: i => i === 0 ? -100 : 50, // heroImage dari kiri, teks dari kanan
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.2,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: '.hero-wrapper',
-        start: 'top 80%',
-        end: 'bottom 20%',
-        toggleActions: 'play reverse play reverse',
-      }
-    })
-  })
+  // Timeline animasi smooth
+  gsap.timeline({ defaults: { duration: 0.8, ease: "power2.out" } })
+    .from(heroImage.value, { x: -100, opacity: 0 }) // image dari kiri
+    .from([title.value, role.value, description.value], 
+          { x: 50, opacity: 0, stagger: 0.2 }, "-=0.5") // teks dari kanan
 })
 </script>

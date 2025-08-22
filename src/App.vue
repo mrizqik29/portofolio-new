@@ -2,7 +2,7 @@
   <StarBackground />
   <Header/>
   <!-- <DotLottieVue ref="astronautRef" :src="spaceLottie" autoplay loop class="astronaut" /> -->
-  <Astronot />
+  <!-- <Astronot /> -->
   <Home />
   <Skill />
   <Website/>
@@ -18,7 +18,7 @@ import Project from './views/Project.vue';
 import StarBackground from './views/Background.vue';
 import Header from "./views/Header.vue";
 import Website from "./views/Website.vue";
-import Astronot from "./views/Astronot.vue";
+// import Astronot from "./views/Astronot.vue";
 
 </script>
 

@@ -8,9 +8,10 @@
             :alt="item.title"
             class="website-image"
             :class="item.size"
-            loading="lazy"
+            loading="eager" 
+            style="will-change: transform, opacity;"
           />
-          <div class="website-text"> 
+          <div class="website-text" style="will-change: transform, opacity;"> 
             <h2 class="title">{{ item.title }}</h2>         
             <p class="equipment">{{ item.equipment }}</p>
             <p class="description">{{ item.description }}</p>            
@@ -182,28 +183,25 @@ description: 'Fitur Order Barang memungkinkan perpindahan barang antar ruangan d
   }
 ])
 
+
 onMounted(() => {
   nextTick(() => {
-    // Animasi semua item dalam satu group
     const allItems = websiteSection.value.querySelectorAll('.website-item')
-    gsap.fromTo(
-      allItems,
-      { y: 60, opacity: 0, scale: 0.9 },
-      { 
-        y: 0,
-        opacity: 1,
-        scale: 1,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: 'expo.out',
-        scrollTrigger: {
-          trigger: websiteSection.value,
-          start: 'top 85%',
-          end: 'bottom 20%',
-          toggleActions: 'play reverse play reverse'
-        }
+
+    gsap.from(allItems, {
+      y: 20,             // gerakan ringan ke atas
+      opacity: 0,
+      scale: 0.97,       // transform minimal
+      duration: 0.7,     // lebih cepat untuk smooth
+      stagger: 0.08,     // animasi sedikit demi sedikit
+      ease: 'power1.out',
+      scrollTrigger: {
+        trigger: websiteSection.value,
+        start: 'top 90%',  // mulai sedikit lebih awal saat scroll
+        toggleActions: 'play none none none',
+        once: true,        // animasi hanya sekali
       }
-    )
+    })
   })
 })
 </script>
