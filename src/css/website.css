@@ -1,0 +1,196 @@
+/* Container utama */
+.website {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: clamp(1rem, 2vw, 2rem);
+  margin-top: clamp(2rem, 5vw, 5rem);
+  position: relative;
+  padding: 0 1rem;
+}
+
+/* Wrapper tiap kategori */
+.website-wrapper {
+  position: relative;
+  gap: clamp(1rem, 2vw, 2rem);
+  max-width: 1200px;
+  width: 100%;
+  border-radius: clamp(1rem, 2vw, 3rem);
+  backdrop-filter: blur(5px);
+  box-shadow: 0 0 30px rgba(0,0,0,0.5);
+  overflow: hidden;
+  z-index: 0;
+  margin-bottom: clamp(1rem, 3vw, 2rem);
+}
+
+/* Neon border */
+.website-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(90deg, transparent, #04d9ff, transparent);
+  background-size: 200% 100%;
+  animation: neon-run 10s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+
+  -webkit-mask: linear-gradient(#fff 0 0) content-box,
+                 linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+@keyframes neon-run {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Kontainer website-item */
+.website-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Setiap item: gambar kiri, teks kanan */
+.website-item {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; /* biar responsif */
+  max-width: clamp(300px, 90%, 1200px);
+  align-items: flex-start;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  border-radius: clamp(1rem, 2vw, 1.5rem);
+  padding: clamp(1rem, 2vw, 2rem);
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.website-item:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+/* Gambar */
+.website-image {
+  width: clamp(200px, 40%, 600px);
+  height: auto;
+  object-fit: cover;
+  border-radius: 12px;
+  flex-shrink: 0; /* biar tidak mengecil terlalu kecil */
+}
+
+.website-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Konten teks */
+.website-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* Teks */
+.text-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.equipment {
+  font-size: clamp(0.85rem, 2vw, 1.5rem);
+  font-weight: 400;
+  color: #fffcfc;
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  font-size: clamp(1rem, 2.5vw, 2rem);
+  color: #04d9ff;
+  margin: 0.3rem 0;
+  font-family: "Montserrat", sans-serif;
+}
+
+.description {
+  font-size: clamp(0.85rem, 2vw, 1.2rem);
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+/* Tombol */
+.btn {
+  display: inline-block;
+  padding: clamp(0.4rem, 1vw, 0.8rem) clamp(0.8rem, 2vw, 1.2rem);
+  background-color: #04d9ff;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: 0.3s;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+}
+
+.btn:hover {
+  background-color: #005fcc;
+}
+
+/* Judul wrapper */
+.website-wrapper h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  color: #04d9ff;
+  font-family: "Montserrat", sans-serif;
+}
+
+/* 🔹 Responsive */
+
+/* Desktop ≤ 1200px */
+@media (max-width: 1200px) {
+  .website-wrapper { padding: clamp(1rem, 2vw, 2rem); }
+}
+
+/* Desktop ≤ 1024px */
+@media (max-width: 1024px) {
+  .website-item { max-width: 100%; }
+}
+
+/* Tablet ≤ 768px */
+@media (max-width: 768px) {
+  .website-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .website-image { width: 80%; max-width: 100%; }
+  .website-text { width: 100%; }
+  .btn { align-self: center; }
+}
+
+/* HP ≤ 600px */
+@media (max-width: 600px) {
+  .title { font-size: clamp(0.95rem, 4vw, 1.3rem); }
+  .description { font-size: clamp(0.85rem, 3vw, 1rem); }
+  .equipment { font-size: clamp(0.8rem, 3vw, 0.95rem); }
+  .website-image { width: 100%; }
+  .btn { width: 95%; padding: 0.4rem 0; }
+}
+
+/* HP kecil ≤ 360px */
+@media (max-width: 360px) {
+  .title { font-size: clamp(0.9rem, 4vw, 1.2rem); }
+  .description { font-size: clamp(0.8rem, 3vw, 0.95rem); }
+  .equipment { font-size: clamp(0.75rem, 3vw, 0.9rem); }
+  .btn { width: 100%; padding: 0.35rem 0; font-size: 0.85rem; }
+}
