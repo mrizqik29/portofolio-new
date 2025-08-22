@@ -83,7 +83,7 @@ const setupGSAP = () => {
         end: () => `+=${totalSections * window.innerWidth}`,
         scrub: true,
         pin: true,
-        anticipatePin: 1,
+        anticipatePin: 0.5,
         snap: 1 / (totalSections - 1),
       }
     });
