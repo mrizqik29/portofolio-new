@@ -19,107 +19,91 @@ const webSkills = ref(null)
 const creativeSkills = ref(null)
 const sectionTitle = ref(null)
 
-const webSkillsList = [
+const webSkillsList = ref([
   { name: 'Laravel', logo: logo4 },
   { name: 'Vue.js', logo: logo5 },
   { name: 'HTML', logo: logo6 },
   { name: 'CSS', logo: logo7 },
-]
+])
 
-const creativeSkillsList = [
+const creativeSkillsList = ref([
   { name: 'After Effect', logo: logo1 },
   { name: 'Adobe Illustrator', logo: logo2 },
   { name: 'Premiere Pro', logo: logo3 },
-]
+])
+
+function rotateArray(arr) {
+  return [...arr.slice(1), arr[0]]
+}
+
+// Flip dengan GSAP rotateY + pause 5 detik
+function flipRight(containerRef, listRef) {
+  const items = containerRef.value.querySelectorAll('.skill-item')
+
+  gsap.to(items, {
+    rotateY: 90,
+    opacity: 0,
+    duration: 0.4,
+    stagger: 0.05,
+    ease: 'power1.in',
+    onComplete: () => {
+      listRef.value = rotateArray(listRef.value)
+      nextTick(() => {
+        const updatedItems = containerRef.value.querySelectorAll('.skill-item')
+        gsap.fromTo(updatedItems,
+          { rotateY: -90, opacity: 0 },
+          { rotateY: 0, opacity: 1, duration: 0.4, stagger: 0.05, ease: 'power1.out' }
+        )
+      })
+    }
+  })
+}
+
+function startFlipWithPause(containerRef, listRef, pause = 8000) {
+  const loop = () => {
+    flipRight(containerRef, listRef)
+    setTimeout(loop, pause)
+  }
+  setTimeout(loop, pause) // start first flip after pause
+}
 
 onMounted(() => {
   nextTick(() => {
-    // Animasi judul utama (opsional)
-    if (sectionTitle.value) {
-      gsap.from(sectionTitle.value, {
-        y: -50,
+    const setupSkillAnimation = (containerRef) => {
+      const items = containerRef.value.querySelectorAll('.skill-item')
+      gsap.from(containerRef.value.querySelector('h1'), {
+        y: -20,
         opacity: 0,
-        duration: 0.8,
+        duration: 0.4,
         ease: 'power2.out',
-        scrollTrigger: {
-          trigger: sectionTitle.value,
-          start: 'top 90%',
-          end: 'bottom 10%',
-          toggleActions: 'play reverse play reverse',
-        }
+        scrollTrigger: { trigger: containerRef.value, start: 'top 85%', toggleActions: 'play none none none' }
+      })
+      gsap.from(items, {
+        y: 10,
+        opacity: 0,
+        scale: 0.95,
+        duration: 0.5,
+        stagger: 0.05,
+        ease: 'back.out(1.1)',
+        scrollTrigger: { trigger: containerRef.value, start: 'top 85%', toggleActions: 'play none none none' }
       })
     }
 
-    // Animasi Web Developer
-    const webItems = webSkills.value.querySelectorAll('.skill-item')
-    gsap.fromTo(
-      webSkills.value.querySelector('h1'),
-      { y: -30, opacity: 0 },
-      { 
-        y: 0, opacity: 1, duration: 0.6, ease: 'power2.out',
-        scrollTrigger: {
-          trigger: webSkills.value,
-          start: 'top 85%',
-          end: 'bottom 20%',
-          toggleActions: 'play reverse play reverse',
-        }
-      }
-    )
-    gsap.fromTo(
-      webItems,
-      { y: 40, opacity: 0, scale: 0.85 },
-      { 
-        y: 0, opacity: 1, scale: 1,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: 'back.out(1.5)',
-        scrollTrigger: {
-          trigger: webSkills.value,
-          start: 'top 85%',
-          end: 'bottom 20%',
-          toggleActions: 'play reverse play reverse',
-        }
-      }
-    )
+    if (webSkills.value) setupSkillAnimation(webSkills)
+    if (creativeSkills.value) setupSkillAnimation(creativeSkills)
 
-    // Animasi Creative
-    const creativeItems = creativeSkills.value.querySelectorAll('.skill-item')
-    gsap.fromTo(
-      creativeSkills.value.querySelector('h1'),
-      { y: -30, opacity: 0 },
-      { 
-        y: 0, opacity: 1, duration: 0.6, ease: 'power2.out',
-        scrollTrigger: {
-          trigger: creativeSkills.value,
-          start: 'top 85%',
-          end: 'bottom 20%',
-          toggleActions: 'play reverse play reverse',
-        }
-      }
-    )
-    gsap.fromTo(
-      creativeItems,
-      { y: 40, opacity: 0, scale: 0.85 },
-      { 
-        y: 0, opacity: 1, scale: 1,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: 'back.out(1.5)',
-        scrollTrigger: {
-          trigger: creativeSkills.value,
-          start: 'top 85%',
-          end: 'bottom 20%',
-          toggleActions: 'play reverse play reverse',
-        }
-      }
-    )
+    // Start flip with 5s pause
+    if (webSkills.value) startFlipWithPause(webSkills, webSkillsList, 5000)
+    if (creativeSkills.value) startFlipWithPause(creativeSkills, creativeSkillsList, 5000)
   })
 })
 </script>
 
+
+
+
 <template>
   <section class="skill" id="skill">
-
     <div class="skill-wrapper" ref="webSkills">
       <h1>Web Developer</h1>
       <div class="skill-content">            
