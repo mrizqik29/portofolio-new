@@ -3,17 +3,22 @@
     <div class="website-wrapper" v-for="(category, cIndex) in skillCategories" :key="cIndex">
       <div class="website-content">
         <div class="website-item" v-for="(item, index) in category.items" :key="index">
-        <img :src="item.image" :alt="item.title" class="website-image" :class="item.size"  />
-        <div class="website-text"> 
+          <img
+            :src="item.image"
+            :alt="item.title"
+            class="website-image"
+            :class="item.size"
+            loading="lazy"
+          />
+          <div class="website-text"> 
             <h2 class="title">{{ item.title }}</h2>         
             <p class="equipment">{{ item.equipment }}</p>
             <p class="description">{{ item.description }}</p>            
-                <a v-if="item.website" :href="item.website" target="_blank" class="btn">
-                Kunjungi Website
-                </a>
+            <a v-if="item.website" :href="item.website" target="_blank" class="btn">
+              Kunjungi Website
+            </a>
+          </div>
         </div>
-        </div>
-
       </div>
     </div>
   </section>
@@ -179,57 +184,26 @@ description: 'Fitur Order Barang memungkinkan perpindahan barang antar ruangan d
 
 onMounted(() => {
   nextTick(() => {
-    // Animasi judul utama
+    // Animasi semua item dalam satu group
+    const allItems = websiteSection.value.querySelectorAll('.website-item')
     gsap.fromTo(
-      sectionTitle.value,
-      { y: -50, opacity: 0, filter: "blur(8px)" },
-      {
+      allItems,
+      { y: 60, opacity: 0, scale: 0.9 },
+      { 
         y: 0,
         opacity: 1,
-        filter: "blur(0px)",
-        duration: 1,
-        ease: "power3.out",
+        scale: 1,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: 'expo.out',
         scrollTrigger: {
           trigger: websiteSection.value,
-          start: "top 85%",
-          end: "bottom 20%",
-          toggleActions: "play reverse play reverse",
+          start: 'top 85%',
+          end: 'bottom 20%',
+          toggleActions: 'play reverse play reverse'
         }
       }
     )
-
-    // Animasi kategori & item
-    const categories = websiteSection.value.querySelectorAll('.website-wrapper')
-    categories.forEach((cat) => {
-      const items = cat.querySelectorAll('.website-item')
-
-      gsap.fromTo(
-        items,
-        { 
-          y: 60, 
-          opacity: 0, 
-          scale: 0.85, 
-          rotateX: -15, 
-          filter: "blur(6px)" 
-        },
-        { 
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          rotateX: 0,
-          filter: "blur(0px)",
-          duration: 1,
-          stagger: 0.25,
-          ease: "expo.out",
-          scrollTrigger: {
-            trigger: cat,
-            start: "top 85%",
-            end: "bottom 20%",
-            toggleActions: "play reverse play reverse",
-          }
-        }
-      )
-    })
   })
 })
 </script>

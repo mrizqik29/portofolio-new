@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -33,87 +33,98 @@ const creativeSkillsList = [
 ]
 
 onMounted(() => {
-  // Animasi judul utama
-  gsap.from(sectionTitle.value, {
-    y: -50,
-    opacity: 0,
-    duration: 0.8,
-    ease: 'power2.out',
-    scrollTrigger: {
-      trigger: sectionTitle.value,
-      start: 'top 90%',
-      end: 'bottom 10%',
-      toggleActions: 'play reverse play reverse',
+  nextTick(() => {
+    // Animasi judul utama (opsional)
+    if (sectionTitle.value) {
+      gsap.from(sectionTitle.value, {
+        y: -50,
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: sectionTitle.value,
+          start: 'top 90%',
+          end: 'bottom 10%',
+          toggleActions: 'play reverse play reverse',
+        }
+      })
     }
-  })
 
-  // Animasi untuk Web Developer
-  gsap.from(webSkills.value.querySelector('h1'), {
-    y: -30,
-    opacity: 0,
-    duration: 0.6,
-    ease: 'power2.out',
-    scrollTrigger: {
-      trigger: webSkills.value,
-      start: 'top 85%',
-      end: 'bottom 20%',
-      toggleActions: 'play reverse play reverse',
-    }
-  })
-  gsap.from(webSkills.value.querySelectorAll('.skill-item'), {
-    y: 40,
-    opacity: 0,
-    scale: 0.85,
-    duration: 0.8,
-    stagger: 0.2,
-    ease: 'back.out(1.5)',
-    scrollTrigger: {
-      trigger: webSkills.value,
-      start: 'top 85%',
-      end: 'bottom 20%',
-      toggleActions: 'play reverse play reverse',
-    }
-  })
+    // Animasi Web Developer
+    const webItems = webSkills.value.querySelectorAll('.skill-item')
+    gsap.fromTo(
+      webSkills.value.querySelector('h1'),
+      { y: -30, opacity: 0 },
+      { 
+        y: 0, opacity: 1, duration: 0.6, ease: 'power2.out',
+        scrollTrigger: {
+          trigger: webSkills.value,
+          start: 'top 85%',
+          end: 'bottom 20%',
+          toggleActions: 'play reverse play reverse',
+        }
+      }
+    )
+    gsap.fromTo(
+      webItems,
+      { y: 40, opacity: 0, scale: 0.85 },
+      { 
+        y: 0, opacity: 1, scale: 1,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: 'back.out(1.5)',
+        scrollTrigger: {
+          trigger: webSkills.value,
+          start: 'top 85%',
+          end: 'bottom 20%',
+          toggleActions: 'play reverse play reverse',
+        }
+      }
+    )
 
-  // Animasi untuk Creative
-  gsap.from(creativeSkills.value.querySelector('h1'), {
-    y: -30,
-    opacity: 0,
-    duration: 0.6,
-    ease: 'power2.out',
-    scrollTrigger: {
-      trigger: creativeSkills.value,
-      start: 'top 85%',
-      end: 'bottom 20%',
-      toggleActions: 'play reverse play reverse',
-    }
-  })
-  gsap.from(creativeSkills.value.querySelectorAll('.skill-item'), {
-    y: 40,
-    opacity: 0,
-    scale: 0.85,
-    duration: 0.8,
-    stagger: 0.2,
-    ease: 'back.out(1.5)',
-    scrollTrigger: {
-      trigger: creativeSkills.value,
-      start: 'top 85%',
-      end: 'bottom 20%',
-      toggleActions: 'play reverse play reverse',
-    }
+    // Animasi Creative
+    const creativeItems = creativeSkills.value.querySelectorAll('.skill-item')
+    gsap.fromTo(
+      creativeSkills.value.querySelector('h1'),
+      { y: -30, opacity: 0 },
+      { 
+        y: 0, opacity: 1, duration: 0.6, ease: 'power2.out',
+        scrollTrigger: {
+          trigger: creativeSkills.value,
+          start: 'top 85%',
+          end: 'bottom 20%',
+          toggleActions: 'play reverse play reverse',
+        }
+      }
+    )
+    gsap.fromTo(
+      creativeItems,
+      { y: 40, opacity: 0, scale: 0.85 },
+      { 
+        y: 0, opacity: 1, scale: 1,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: 'back.out(1.5)',
+        scrollTrigger: {
+          trigger: creativeSkills.value,
+          start: 'top 85%',
+          end: 'bottom 20%',
+          toggleActions: 'play reverse play reverse',
+        }
+      }
+    )
   })
 })
 </script>
 
 <template>
   <section class="skill" id="skill">
-    <!-- <h1 class="judul" ref="sectionTitle">Skill</h1> -->
 
     <div class="skill-wrapper" ref="webSkills">
       <h1>Web Developer</h1>
       <div class="skill-content">            
         <div class="skill-item" v-for="(skill, index) in webSkillsList" :key="index">
-          <img :src="skill.logo" :alt="skill.name" />
+          <img :src="skill.logo" :alt="skill.name" loading="lazy" />
           <p>{{ skill.name }}</p>
         </div>
       </div>
@@ -123,7 +134,7 @@ onMounted(() => {
       <h1>Design & Creative Tools</h1>
       <div class="skill-content">            
         <div class="skill-item" v-for="(skill, index) in creativeSkillsList" :key="index">
-          <img :src="skill.logo" :alt="skill.name" />
+          <img :src="skill.logo" :alt="skill.name" loading="lazy" />
           <p>{{ skill.name }}</p>
         </div>
       </div>

@@ -6,7 +6,7 @@
           <div class="task-slide" v-for="(pair, idx) in slides" :key="idx">
             <div class="task-card" v-for="task in pair" :key="task.title">
               <div class="desain" v-if="task.image">
-                <img :src="task.image" alt="Gambar Project" />
+                <img :src="task.image" alt="Gambar Project" loading="lazy" />
               </div>
               <div class="text-content">
                 <h3>{{ task.title }}</h3>
@@ -23,12 +23,12 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch, nextTick } from "vue";
+import { ref, computed, onMounted, watch, nextTick, onBeforeUnmount } from "vue";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import '../css/project.css'
-gsap.registerPlugin(ScrollTrigger);
 
+gsap.registerPlugin(ScrollTrigger);
 
 import desain2 from '../assets/2.jpg'
 import desain3 from '../assets/3.png'
@@ -39,7 +39,7 @@ import desain7 from '../assets/7.png'
 import desain8 from '../assets/8.jpg'
 
 const tasks = [
-    { title: "Desain Poster", image: desain6, items: ["Desain untuk Sosialisasi Vaksin Lansia"] },
+  { title: "Desain Poster", image: desain6, items: ["Desain untuk Sosialisasi Vaksin Lansia"] },
   { title: "Desain Vector", image: desain2, items: ["Desain pribadi dengan Adobe Illustrator"] },
   { title: "Desain WPAP", image: desain3, items: ["Desain pribadi dengan Adobe Illustrator"] },
   { title: "Desain Vector", image: desain4, items: ["Desain pribadi dengan Adobe Illustrator"] },
@@ -58,8 +58,16 @@ const slides = computed(() => {
   return result;
 });
 
+let scrollTriggerInstance = null;
+
 const setupGSAP = () => {
   nextTick(() => {
+    // Hapus ScrollTrigger lama kalau ada
+    if (scrollTriggerInstance) {
+      scrollTriggerInstance.kill();
+      scrollTriggerInstance = null;
+    }
+
     const container = document.querySelector(".task-group-container");
     const sections = gsap.utils.toArray(".task-slide");
     const totalSections = sections.length;
@@ -67,7 +75,7 @@ const setupGSAP = () => {
     gsap.set(container, { display: "flex", width: `${totalSections * 100}vw` });
     gsap.set(sections, { flex: `0 0 100vw` });
 
-    gsap.to(sections, {
+    scrollTriggerInstance = gsap.to(sections, {
       xPercent: -100 * (totalSections - 1),
       ease: "none",
       scrollTrigger: {
@@ -86,11 +94,19 @@ const setupGSAP = () => {
 // Setup GSAP saat mounted
 onMounted(() => setupGSAP());
 
-// Watch slides agar GSAP update saat resize / cardsPerSlide berubah
+// Update GSAP saat slides berubah
 watch(slides, () => setupGSAP());
 
 // Update cardsPerSlide saat resize
-window.addEventListener('resize', () => {
+const handleResize = () => {
   cardsPerSlide.value = window.innerWidth > 768 ? 2 : 1;
+};
+
+window.addEventListener('resize', handleResize);
+
+// Cleanup listener & ScrollTrigger saat component di-unmount
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', handleResize);
+  if (scrollTriggerInstance) scrollTriggerInstance.kill();
 });
 </script>

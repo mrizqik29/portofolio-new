@@ -4,7 +4,7 @@
       <div class="hero-content">
         <!-- Gambar di kiri -->
         <div class="hero-image" ref="heroImage">
-          <img :src="Profile" alt="Profile" />
+          <img :src="Profile" alt="Profile" loading="lazy" />
         </div>
 
         <!-- Teks di kanan -->
@@ -23,7 +23,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Profile from '../assets/profile.jpg'
@@ -31,39 +31,28 @@ import '../css/home.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
+const heroImage = ref(null)
 const title = ref(null)
 const role = ref(null)
 const description = ref(null)
-const heroImage = ref(null)
 
 onMounted(() => {
-  // Timeline animasi masuk dan keluar
-  gsap.timeline({
-    scrollTrigger: {
-      trigger: '.hero-wrapper',
-      start: 'top 80%',
-      end: 'bottom 20%',
-      toggleActions: 'play reverse play reverse', // play saat masuk, reverse saat keluar
-    }
+  nextTick(() => {
+    const elements = [heroImage.value, title.value, role.value, description.value]
+
+    gsap.from(elements, {
+      x: i => i === 0 ? -100 : 50, // heroImage dari kiri, teks dari kanan
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.2,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: '.hero-wrapper',
+        start: 'top 80%',
+        end: 'bottom 20%',
+        toggleActions: 'play reverse play reverse',
+      }
+    })
   })
-  .fromTo(heroImage.value,
-    { x: -100, opacity: 0 },
-    { x: 0, opacity: 1, duration: 1 }
-  )
-  .fromTo(title.value,
-    { x: 50, opacity: 0 },
-    { x: 0, opacity: 1, duration: 1 },
-    "-=0.5"
-  )
-  .fromTo(role.value,
-    { x: 50, opacity: 0 },
-    { x: 0, opacity: 1, duration: 0.8 },
-    "-=0.5"
-  )
-  .fromTo(description.value,
-    { x: 50, opacity: 0 },
-    { x: 0, opacity: 1, duration: 0.8 },
-    "-=0.5"
-  )
 })
 </script>
