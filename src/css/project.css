@@ -33,25 +33,10 @@
     backdrop-filter: blur(2px);
   box-shadow: 0 0 30px rgba(0,0,0,0.5);
   overflow: hidden;
-}
-
-.task-card::after {
-  content: '';
-  position: absolute;
-  inset: 0; /* menempel ke semua sisi */
-  border-radius: 20px; /* ikuti border utama */
-  padding: 2px; /* tebal neon */
-  background: linear-gradient(90deg, transparent, #04d9ff, transparent);
-  background-size: 200% 100%;
-  pointer-events: none;
-  z-index: 1;
-
-  /* Buat hanya border yang terlihat */
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
+    border-radius: 80px;
+  border-color: #aaaaaa56;
+  border-style: solid;
+  border-width: 2px;
 }
 
 .desain { flex: 0 1 40%; max-width: 40%; }
