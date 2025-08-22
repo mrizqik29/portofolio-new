@@ -5,18 +5,17 @@ import { createNoise3D } from "simplex-noise";
 
 const container = ref(null);
 
-function generateCircleTexture() {
-  const size = 64; // lebih kecil
+function generateCircleTexture(size = 32) {
+  // size lebih kecil → ringan
   const canvas = document.createElement("canvas");
-  canvas.width = size;
-  canvas.height = size;
+  canvas.width = canvas.height = size;
   const ctx = canvas.getContext("2d");
 
-  ctx.clearRect(0, 0, size, size);
   const gradient = ctx.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
   gradient.addColorStop(0, "rgba(255,255,255,1)");
   gradient.addColorStop(0.4, "rgba(255,255,255,0.3)");
   gradient.addColorStop(1, "rgba(255,255,255,0)");
+
   ctx.fillStyle = gradient;
   ctx.fillRect(0, 0, size, size);
 
@@ -30,12 +29,12 @@ onMounted(() => {
   const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
   camera.position.z = 6;
 
-  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
   container.value.appendChild(renderer.domElement);
 
   // --- Nebula ---
-  const particles = 2500; // dikurangi
+  const particles = 1200; // lebih ringan
   const geometry = new THREE.BufferGeometry();
   const positions = new Float32Array(particles * 3);
   const colors = new Float32Array(particles * 3);
@@ -53,7 +52,6 @@ onMounted(() => {
     const y = (Math.random()-0.5)*20;
     const z = (Math.random()-0.5)*20;
     const density = noise3D(x*0.15, y*0.15, z*0.15);
-
     if (density > 0) {
       positions.set([x, y, z], ptr*3);
       const t = (density+1)/2;
@@ -63,15 +61,14 @@ onMounted(() => {
     }
   }
 
-  // Resize Float32Array supaya sesuai jumlah valid partikel
   geometry.setAttribute("position", new THREE.BufferAttribute(positions.slice(0, ptr*3), 3));
   geometry.setAttribute("color", new THREE.BufferAttribute(colors.slice(0, ptr*3), 3));
 
   const material = new THREE.PointsMaterial({
-    size: 0.2,
+    size: 0.18, // lebih kecil
     vertexColors: true,
     transparent: true,
-    opacity: 0.7,
+    opacity: 0.6,
     blending: THREE.AdditiveBlending,
     depthWrite: false,
     map: generateCircleTexture(),
@@ -80,18 +77,11 @@ onMounted(() => {
 
   const nebula = new THREE.Points(geometry, material);
   scene.add(nebula);
-  scene.add(new THREE.AmbientLight(0xffffff, 0.2));
+  scene.add(new THREE.AmbientLight(0xffffff, 0.15));
 
-  let prevTime = performance.now();
   function animate() {
-    const curTime = performance.now();
-    const delta = (curTime - prevTime) * 0.001; // detik
-    prevTime = curTime;
-
-    nebula.rotation.y += 0.07 * delta;
-    nebula.rotation.x += 0.02 * delta;
-    material.size = 0.2 + Math.sin(curTime*0.002)*0.03;
-
+    nebula.rotation.y += 0.0008; // rotasi lebih halus & ringan
+    nebula.rotation.x += 0.00025;
     renderer.render(scene, camera);
     requestAnimationFrame(animate);
   }
