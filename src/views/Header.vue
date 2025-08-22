@@ -60,9 +60,8 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { gsap } from "gsap";
-import '../css/header.css'
+import '../css/header.css';
 
-// Gmail Compose Link
 const email = "rizqikurni29@gmail.com"
 const subject = "Mas, Ganteng banget mas"
 const body = ""
