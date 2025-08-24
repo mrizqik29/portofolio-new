@@ -6,7 +6,7 @@
   <Home />
   <Skill />
   <Website/>
- <Project />
+     <Project />
 </template>
 
 

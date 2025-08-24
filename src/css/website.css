@@ -109,7 +109,7 @@
 .btn {
   display: inline-block;
   padding: clamp(0.4rem, 1vw, 0.8rem) clamp(0.8rem, 2vw, 1.2rem);
-  background-color: #04d9ff;
+  background-color: #0447ff;
   color: white;
   border-radius: 8px;
   text-decoration: none;
@@ -120,7 +120,7 @@
 }
 
 .btn:hover {
-  background-color: #005fcc;
+  background-color: #0e00cc;
 }
 
 /* Judul wrapper */
@@ -131,6 +131,18 @@
   font-size: clamp(2rem, 4vw, 2.5rem);
   color: #04d9ff;
   font-family: "Montserrat", sans-serif;
+}
+
+.github-buttons {
+  display: flex;
+  flex-wrap: wrap; /* biar kalau sempit bisa turun */
+  gap: 8px; /* jarak antar tombol */
+}
+
+/* Tombol di dalam github-buttons */
+.github-buttons .btn {
+  flex: 1; /* biar rata dan responsif */
+  text-align: center;
 }
 
 /* 🔹 Responsive */
@@ -165,6 +177,12 @@
   .equipment { font-size: clamp(0.8rem, 3vw, 0.95rem); }
   .website-image { width: 100%; }
   .btn { width: 95%; padding: 0.4rem 0; }
+    .github-buttons {
+    justify-content: space-between; /* pisahkan rata */
+  }
+  .github-buttons .btn {
+    width: 48%; /* masing-masing ambil setengah */
+  }
 }
 
 /* HP kecil ≤ 360px */

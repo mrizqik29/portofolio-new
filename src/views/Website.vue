@@ -18,6 +18,23 @@
             <a v-if="item.website" :href="item.website" target="_blank" class="btn">
               Kunjungi Website
             </a>
+              <div v-if="item.title.includes('Website Inventori')" class="github-buttons" style="margin-top: 8px;">
+                <a 
+                :href="item.githubFrontend" 
+                target="_blank" 
+                class="btn" 
+                style="margin-right: 5px;"
+                >
+                Code Front-end
+                </a>
+                <a 
+                :href="item.githubBackend" 
+                target="_blank" 
+                class="btn"
+                >
+                Code Back-end
+                </a>
+            </div>
           </div>
         </div>
       </div>
@@ -78,9 +95,11 @@ const skillCategories = ref([
     items: [
       {
         image: Web2,
-    title: 'Login (Website Inventori)',
-    equipment: 'Equipment: Vue.js (Vite), Laravel, MySQL, CSS, JWT, Hash, XAMPP, VS Code, GSAP, Adobe Illustrator',
-    description: 'Fitur login pada website inventori ini dirancang dengan keamanan tinggi menggunakan token JWT dan hash untuk melindungi data pengguna. Menggunakan Vue.js (Vite) untuk interaktivitas frontend, Laravel dan MySQL untuk backend dan database, serta GSAP untuk animasi UI yang halus. Desain dibuat responsif dan mudah digunakan, memastikan pengalaman pengguna yang aman dan nyaman.'
+        title: 'Login (Website Inventori)',
+        equipment: 'Equipment: Vue.js (Vite), Laravel, MySQL, CSS, JWT, Hash, XAMPP, VS Code, GSAP, Adobe Illustrator',
+        description: 'Fitur login pada website inventori ini dirancang dengan keamanan tinggi menggunakan token JWT dan hash untuk melindungi data pengguna. Menggunakan Vue.js (Vite) untuk interaktivitas frontend, Laravel dan MySQL untuk backend dan database, serta GSAP untuk animasi UI yang halus. Desain dibuat responsif dan mudah digunakan, memastikan pengalaman pengguna yang aman dan nyaman.',
+        githubFrontend: 'https://github.com/mrizqik29/inventori',
+        githubBackend: 'https://github.com/mrizqik29/backend'
       }
     ]
   },
@@ -88,10 +107,11 @@ const skillCategories = ref([
     items: [
       {
         image: Web3,
-title: 'Dashboard (Website Inventori)',
-equipment: 'Equipment: Vue.js (Vite), Laravel, MySQL, CSS, XAMPP, VS Code',
-description: 'Dashboard ini menampilkan ringkasan data inventori secara interaktif, termasuk barang terlaris serta laporan pembelian dan penjualan selama setahun terakhir. Menggunakan Vue.js (Vite) untuk frontend, Laravel dan MySQL untuk backend dan database, serta CSS untuk tampilan yang responsif. Fitur ini membantu pengguna memantau performa inventori dan membuat keputusan bisnis lebih mudah dan cepat.'
-
+        title: 'Dashboard (Website Inventori)',
+        equipment: 'Equipment: Vue.js (Vite), Laravel, MySQL, CSS, XAMPP, VS Code',
+        description: 'Dashboard ini menampilkan ringkasan data inventori secara interaktif, termasuk barang terlaris serta laporan pembelian dan penjualan selama setahun terakhir. Menggunakan Vue.js (Vite) untuk frontend, Laravel dan MySQL untuk backend dan database, serta CSS untuk tampilan yang responsif. Fitur ini membantu pengguna memantau performa inventori dan membuat keputusan bisnis lebih mudah dan cepat.'
+,       githubFrontend: 'https://github.com/mrizqik29/inventori',
+        githubBackend: 'https://github.com/mrizqik29/backend'
       }
     ]
   },
@@ -99,41 +119,47 @@ description: 'Dashboard ini menampilkan ringkasan data inventori secara interakt
     items: [
       {
         image: Web4,
-title: 'Add Data (Website Inventori)',
-equipment: 'Equipment: Vue.js (Vite), Laravel, MySQL, CSS, XAMPP, VS Code',
-description: 'Fitur ini memungkinkan pengguna menambahkan data inventori baru, termasuk barang, jenis, satuan, ruangan, dan departemen. Menggunakan Vue.js (Vite) untuk frontend interaktif, Laravel dan MySQL untuk backend dan database, serta CSS untuk desain responsif. Fitur ini membantu pengelolaan inventori menjadi lebih terstruktur dan efisien.'
-      }
+        title: 'Add Data (Website Inventori)',
+        equipment: 'Equipment: Vue.js (Vite), Laravel, MySQL, CSS, XAMPP, VS Code',
+        description: 'Fitur ini memungkinkan pengguna menambahkan data inventori baru, termasuk barang, jenis, satuan, ruangan, dan departemen. Menggunakan Vue.js (Vite) untuk frontend interaktif, Laravel dan MySQL untuk backend dan database, serta CSS untuk desain responsif. Fitur ini membantu pengelolaan inventori menjadi lebih terstruktur dan efisien.'
+,       githubFrontend: 'https://github.com/mrizqik29/inventori',
+        githubBackend: 'https://github.com/mrizqik29/backend'
+    }
     ]
   },
     {
     items: [
       {
         image: Web5,
-title: 'Laporan Penjualan (Website Inventori)',
-equipment: 'Equipment: Vue.js (Vite), CSS, Laravel, MySQL, XAMPP, VS Code',
-description: 'Fitur laporan penjualan ini menampilkan data secara detail berdasarkan transaksi, barang, dan kasir. Menggunakan Vue.js (Vite) untuk frontend interaktif, Laravel dan MySQL untuk backend dan database, serta CSS untuk tampilan yang responsif. Fitur ini membantu pengguna menganalisis penjualan dengan cepat dan akurat, mendukung pengambilan keputusan bisnis.'
-
+        title: 'Laporan Penjualan (Website Inventori)',
+        equipment: 'Equipment: Vue.js (Vite), CSS, Laravel, MySQL, XAMPP, VS Code',
+        description: 'Fitur laporan penjualan ini menampilkan data secara detail berdasarkan transaksi, barang, dan kasir. Menggunakan Vue.js (Vite) untuk frontend interaktif, Laravel dan MySQL untuk backend dan database, serta CSS untuk tampilan yang responsif. Fitur ini membantu pengguna menganalisis penjualan dengan cepat dan akurat, mendukung pengambilan keputusan bisnis.'
+,       githubFrontend: 'https://github.com/mrizqik29/inventori',
+        githubBackend: 'https://github.com/mrizqik29/backend'
       }
     ]
-  },
+    },
     {
     items: [
       {
         image: Web6,
-title: 'Laporan Stock (Website Inventori)',
-equipment: 'Equipment: Vue.js (Vite), CSS, Laravel, MySQL, XAMPP, VS Code',
-description: 'Fitur Laporan Stock ini menampilkan data inventori lengkap dari semua ruangan dan barang, termasuk laporan stock rendah. Menggunakan Vue.js (Vite) untuk frontend interaktif, Laravel dan MySQL untuk backend dan database, serta CSS untuk tampilan yang responsif. Fitur ini membantu pengguna memantau ketersediaan barang secara real-time dan mengambil keputusan pengelolaan inventori dengan lebih cepat dan akurat.'
-      }
+        title: 'Laporan Stock (Website Inventori)',
+        equipment: 'Equipment: Vue.js (Vite), CSS, Laravel, MySQL, XAMPP, VS Code',
+        description: 'Fitur Laporan Stock ini menampilkan data inventori lengkap dari semua ruangan dan barang, termasuk laporan stock rendah. Menggunakan Vue.js (Vite) untuk frontend interaktif, Laravel dan MySQL untuk backend dan database, serta CSS untuk tampilan yang responsif. Fitur ini membantu pengguna memantau ketersediaan barang secara real-time dan mengambil keputusan pengelolaan inventori dengan lebih cepat dan akurat.'
+,       githubFrontend: 'https://github.com/mrizqik29/inventori',
+        githubBackend: 'https://github.com/mrizqik29/backend'
+    }
     ]
   },
     {
     items: [
       {
         image: Web7,
-title: 'Log Data (Website Inventori)',
-equipment: 'Equipment: Vue.js (Vite), CSS, Laravel, MySQL, XAMPP, VS Code',
-description: 'Fitur Log Data ini mencatat semua pergerakan barang, termasuk penerimaan, penjualan, dan pemesanan antar ruangan. Pengguna juga dapat mengekspor data ke format Excel untuk analisis lebih lanjut. Menggunakan Vue.js (Vite) untuk frontend interaktif, Laravel dan MySQL untuk backend dan database, serta CSS untuk tampilan yang responsif. Fitur ini memudahkan pemantauan inventori secara lengkap dan efisien.'
-
+        title: 'Log Data (Website Inventori)',
+        equipment: 'Equipment: Vue.js (Vite), CSS, Laravel, MySQL, XAMPP, VS Code',
+        description: 'Fitur Log Data ini mencatat semua pergerakan barang, termasuk penerimaan, penjualan, dan pemesanan antar ruangan. Pengguna juga dapat mengekspor data ke format Excel untuk analisis lebih lanjut. Menggunakan Vue.js (Vite) untuk frontend interaktif, Laravel dan MySQL untuk backend dan database, serta CSS untuk tampilan yang responsif. Fitur ini memudahkan pemantauan inventori secara lengkap dan efisien.'
+,       githubFrontend: 'https://github.com/mrizqik29/inventori',
+        githubBackend: 'https://github.com/mrizqik29/backend'
       }
     ]
   },
@@ -141,10 +167,11 @@ description: 'Fitur Log Data ini mencatat semua pergerakan barang, termasuk pene
     items: [
       {
         image: Web8,
-title: 'Kirim Barang (Website Inventori)',
-equipment: 'Equipment: Vue.js (Vite), CSS, Laravel, MySQL, XAMPP, VS Code',
-description: 'Fitur Kirim Barang memungkinkan pengguna memindahkan barang dari satu ruangan ke ruangan lain dengan mudah. Backend menggunakan metode FIFO (First In, First Out) sehingga barang yang masuk lebih dulu akan keluar terlebih dahulu dari tabel stok. Menggunakan Vue.js (Vite) untuk frontend interaktif, Laravel dan MySQL untuk backend dan database, serta CSS untuk tampilan responsif. Fitur ini membantu pengelolaan inventori lebih terstruktur dan efisien.'
-
+        title: 'Kirim Barang (Website Inventori)',
+        equipment: 'Equipment: Vue.js (Vite), CSS, Laravel, MySQL, XAMPP, VS Code',
+        description: 'Fitur Kirim Barang memungkinkan pengguna memindahkan barang dari satu ruangan ke ruangan lain dengan mudah. Backend menggunakan metode FIFO (First In, First Out) sehingga barang yang masuk lebih dulu akan keluar terlebih dahulu dari tabel stok. Menggunakan Vue.js (Vite) untuk frontend interaktif, Laravel dan MySQL untuk backend dan database, serta CSS untuk tampilan responsif. Fitur ini membantu pengelolaan inventori lebih terstruktur dan efisien.'
+,       githubFrontend: 'https://github.com/mrizqik29/inventori',
+        githubBackend: 'https://github.com/mrizqik29/backend'
       }
     ]
   },
@@ -152,10 +179,11 @@ description: 'Fitur Kirim Barang memungkinkan pengguna memindahkan barang dari s
     items: [
       {
         image: Web9,
-title: 'Penerimaan Barang (Website Inventori)',
-equipment: 'Equipment: Vue.js (Vite), CSS, Laravel, MySQL, XAMPP, VS Code',
-description: 'Fitur Penerimaan Barang digunakan untuk mencatat barang yang diterima dari distributor dan menambahkan stok ke gudang. Menggunakan Vue.js (Vite) untuk frontend interaktif, Laravel dan MySQL untuk backend dan database, serta CSS untuk tampilan responsif. Fitur ini memastikan pencatatan stok gudang akurat dan memudahkan pengelolaan inventori secara efisien.'
-
+        title: 'Penerimaan Barang (Website Inventori)',
+        equipment: 'Equipment: Vue.js (Vite), CSS, Laravel, MySQL, XAMPP, VS Code',
+        description: 'Fitur Penerimaan Barang digunakan untuk mencatat barang yang diterima dari distributor dan menambahkan stok ke gudang. Menggunakan Vue.js (Vite) untuk frontend interaktif, Laravel dan MySQL untuk backend dan database, serta CSS untuk tampilan responsif. Fitur ini memastikan pencatatan stok gudang akurat dan memudahkan pengelolaan inventori secara efisien.'
+,       githubFrontend: 'https://github.com/mrizqik29/inventori',
+        githubBackend: 'https://github.com/mrizqik29/backend'
       }
     ]
   },
@@ -163,21 +191,23 @@ description: 'Fitur Penerimaan Barang digunakan untuk mencatat barang yang diter
     items: [
       {
         image: Web10,
-title: 'Penjualan (Website Inventori)',
-equipment: 'Equipment: Vue.js (Vite), CSS, Laravel, MySQL, XAMPP, VS Code',
-description: 'Fitur Penjualan digunakan untuk menjual barang kepada pelanggan dengan pengelolaan stok yang efisien. Backend menggunakan metode FIFO (First In, First Out) sehingga barang yang masuk lebih dulu akan dijual terlebih dahulu, dan harga tertinggi dari barang yang dijual diambil secara otomatis. Menggunakan Vue.js (Vite) untuk frontend interaktif, Laravel dan MySQL untuk backend dan database, serta CSS untuk tampilan responsif. Fitur ini memudahkan proses penjualan dan memastikan pengelolaan inventori tetap akurat.'
-
+        title: 'Penjualan (Website Inventori)',
+        equipment: 'Equipment: Vue.js (Vite), CSS, Laravel, MySQL, XAMPP, VS Code',
+        description: 'Fitur Penjualan digunakan untuk menjual barang kepada pelanggan dengan pengelolaan stok yang efisien. Backend menggunakan metode FIFO (First In, First Out) sehingga barang yang masuk lebih dulu akan dijual terlebih dahulu, dan harga tertinggi dari barang yang dijual diambil secara otomatis. Menggunakan Vue.js (Vite) untuk frontend interaktif, Laravel dan MySQL untuk backend dan database, serta CSS untuk tampilan responsif. Fitur ini memudahkan proses penjualan dan memastikan pengelolaan inventori tetap akurat.'
+,       githubFrontend: 'https://github.com/mrizqik29/inventori',
+        githubBackend: 'https://github.com/mrizqik29/backend'
       }
     ]
-  },
+    },
     {
     items: [
       {
         image: Web11,
-title: 'Order (Website Inventori)',
-equipment: 'Equipment: Vue.js (Vite), CSS, Laravel, MySQL, XAMPP, VS Code',
-description: 'Fitur Order Barang memungkinkan perpindahan barang antar ruangan dengan efisien. Terdapat dua tab: "List" untuk menampilkan ruangan yang mengajukan permintaan, dan "Request" untuk melihat ruangan tujuan pengiriman. Backend menggunakan metode FIFO (First In, First Out) untuk memastikan barang yang masuk lebih dulu akan dipindahkan terlebih dahulu. Menggunakan Vue.js (Vite) untuk frontend interaktif, Laravel dan MySQL untuk backend, serta CSS untuk tampilan responsif, fitur ini memudahkan pengelolaan inventori antar ruangan secara terstruktur dan akurat.'
-
+        title: 'Order (Website Inventori)',
+        equipment: 'Equipment: Vue.js (Vite), CSS, Laravel, MySQL, XAMPP, VS Code',
+        description: 'Fitur Order Barang memungkinkan perpindahan barang antar ruangan dengan efisien. Terdapat dua tab: "List" untuk menampilkan ruangan yang mengajukan permintaan, dan "Request" untuk melihat ruangan tujuan pengiriman. Backend menggunakan metode FIFO (First In, First Out) untuk memastikan barang yang masuk lebih dulu akan dipindahkan terlebih dahulu. Menggunakan Vue.js (Vite) untuk frontend interaktif, Laravel dan MySQL untuk backend, serta CSS untuk tampilan responsif, fitur ini memudahkan pengelolaan inventori antar ruangan secara terstruktur dan akurat.'
+,       githubFrontend: 'https://github.com/mrizqik29/inventori',
+        githubBackend: 'https://github.com/mrizqik29/backend'
       }
     ]
   }
