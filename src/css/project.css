@@ -60,6 +60,6 @@
   .gallery-title { font-size: 1.6rem; }
 }
 @media (max-width: 480px) {
-  .task-card { width: 150px; }
+  .task-card { width: 130px; }
   .gallery-title { font-size: 1.3rem; }
 }
