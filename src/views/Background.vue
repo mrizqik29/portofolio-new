@@ -34,10 +34,10 @@ onMounted(() => {
   container.value.appendChild(renderer.domElement);
 
   // --- Nebula ---
-  const particles = 1500; // lebih ringan
+  const particles = 3000; // lebih ringan
   const geometry = new THREE.BufferGeometry();
-  const positions = new Float32Array(particles * 3);
-  const colors = new Float32Array(particles * 3);
+  const positions = new Float32Array(particles * 5);
+  const colors = new Float32Array(particles * 5);
 
   const noise3D = createNoise3D();
   const colorChoices = [

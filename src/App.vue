@@ -1,7 +1,7 @@
 <template>
   <StarBackground />
   <Header />
-  <Asteroid :pos="{ x: -0.5, y: 2, z: 1 }" :scale="2" />
+  <!-- <Asteroid :pos="{ x: -0.5, y: 2, z: 1 }" :scale="2" /> -->
   <!-- <DotLottieVue ref="astronautRef" :src="spaceLottie" autoplay loop class="astronaut" /> -->
   <!-- <Astronot /> -->
   <Home />
